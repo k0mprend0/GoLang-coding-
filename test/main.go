@@ -3,8 +3,6 @@ package main
 
 import (
 	"fmt"
-	//"sort"
-	//"math"
 )
 
 //САМАЯ ПРОСТАЯ ФУНКЦИЯ
@@ -86,30 +84,44 @@ import (
 // }
 
 // ИНТЕРФЕЙСЫ
-type Numbers struct { //создали структуру
-	num1 int
-	num2 int
-}
+// type Numbers struct { //создали структуру
+// 	num1 int
+// 	num2 int
+// }
 
 // СОЗДАЛИ ИНТЕРФЕЙС
-type NumbersInterface interface {
-	Sum() int
-	Mult() int
-	Div() float64
-	Sub() int
-}
+// type NumbersInterface interface {
+// 	Sum() int
+// 	Mult() int
+// 	Div() float64
+// 	Sub() int
+// }
 
-func (n Numbers) Sum() int { //структура унаследовала метод Sum() из интерфейса
-	return n.num1 + n.num2
-}
-func (n Numbers) Mult() int {
-	return n.num1 * n.num2
-}
-func (n Numbers) Div() float64 {
-	return float64(n.num1) / float64(n.num2)
-}
-func (n Numbers) Sub() int {
-	return n.num1 - n.num2
+// func (n Numbers) Sum() int { //структура унаследовала метод Sum() из интерфейса
+// 	return n.num1 + n.num2
+// }
+// func (n Numbers) Mult() int {
+// 	return n.num1 * n.num2
+// }
+// func (n Numbers) Div() float64 {
+// 	return float64(n.num1) / float64(n.num2)
+// }
+// func (n Numbers) Sub() int {
+// 	return n.num1 - n.num2
+// }
+
+// ГОРУТИНА (АСИНХРОННЫЕ ФУНКЦИИ)
+// func say(greet string, ch chan string, ch2 chan int) {
+// 	fmt.Println(greet)
+// 	ch <- "Hello from GoRutine" //конструкция для добавления данных в канал
+// 	ch2 <- 77
+// }
+
+func say(greet string, ch chan int) {
+	for i := 0; i <= 5; i++ {
+		ch <- i
+	}
+	close(ch) //закрытие канала
 }
 
 func main() {
@@ -370,12 +382,46 @@ func main() {
 	// fmt.Println(user.getHigherScore())
 
 	//ИНТЕРФЕЙСЫ
-	var i NumbersInterface   // присвоили интерфейс переменной
-	numbers := Numbers{9, 8} // создали структуру
-	i = numbers
-	fmt.Printf("Сумма: %d\n", i.Sum())
-	fmt.Printf("Произведение: %d\n", i.Mult())
-	fmt.Printf("Частное: %f\n", i.Div())
-	fmt.Printf("Разность: %d\n", i.Sub())
-}
+	// var i NumbersInterface   // присвоили интерфейс переменной
+	// numbers := Numbers{9, 8} // создали структуру
+	// i = numbers
+	// fmt.Printf("Сумма: %d\n", i.Sum())
+	// fmt.Printf("Произведение: %d\n", i.Mult())
+	// fmt.Printf("Частное: %f\n", i.Div())
+	// fmt.Printf("Разность: %d\n", i.Sub())
 
+	//РАБОТА С ФАЙЛАМИ
+	//создание файла
+	// data := []byte("appending text to new file")
+	// e := ioutil.WriteFile("test.txt", data, 0600) // 0600 - дефолтное разрешение
+
+	// if e != nil {
+	// 	fmt.Println("Cant create a new file \n", e)
+	// }
+
+	// работа с библиотекой ioutil
+	// file_data, err := ioutil.ReadFile("hello.go.txt") //изначальный тип file_data - byte
+	// if err != nil {                                   //if err exist
+	// 	fmt.Println("Cant read a file \n", err)
+	// }
+	// fmt.Println(string(file_data))
+
+	// //удаление файла
+	// os.Remove("test.txt")
+
+	//СОЗДАНИЕ КАНАЛА
+	// ch := make(chan string) // chan -тип данных для канала
+	// ch2 := make(chan int)
+
+	// //ВЫЗОВ ГОРУТИНЫ
+	// go say("Hello GoLang!", ch, ch2)
+	// //time.Sleep(2 * time.Second) //остановка времени основного потока на n ед. времени
+	// fmt.Println(<-ch, <-ch2)
+
+	//ЗАКРЫТИЕ КАНАЛА
+	ch := make(chan int)
+	go say("Hello GoLang", ch)
+	for a := range ch {
+		fmt.Println(a)
+	}
+}
