@@ -40,16 +40,76 @@ import (
 // }
 
 // СОЗДАНИЕ СТРУКТУРЫ
-type User struct {
-	name     string
-	age      int64
-	password string
+// type User struct {
+// 	name     string
+// 	age      int64
+// 	password string
+// 	score    []int
+// }
+
+// func change(u *User) {
+// 	u.name = "Kate"
+// 	u.age = 15
+// 	u.password = "newpass"
+// }
+
+// МЕТОД СТРУКТУРЫ
+// func (u User) getName() string {
+// 	return u.name
+// }
+
+// func (u *User) setName(name1 string) {
+// 	u.name = name1
+// }
+
+// func (u User) isElder() bool {
+// 	a := u.age
+// 	isTrue := false
+
+// 	if a >= 18 {
+// 		isTrue = true
+// 	} else if a < 18 {
+// 		isTrue = false
+// 	}
+
+// 	return isTrue
+// }
+
+// func (u User) getHigherScore() int {
+// 	higher := 0
+// 	for _, sc := range u.score { //первая переменная в range овтечает за нумерацию, второая за элементы
+// 		if higher < sc {
+// 			higher = sc
+// 		}
+// 	}
+// 	return higher
+// }
+
+// ИНТЕРФЕЙСЫ
+type Numbers struct { //создали структуру
+	num1 int
+	num2 int
 }
 
-func change(u *User) {
-	u.name = "Kate"
-	u.age = 15
-	u.password = "newpass"
+// СОЗДАЛИ ИНТЕРФЕЙС
+type NumbersInterface interface {
+	Sum() int
+	Mult() int
+	Div() float64
+	Sub() int
+}
+
+func (n Numbers) Sum() int { //структура унаследовала метод Sum() из интерфейса
+	return n.num1 + n.num2
+}
+func (n Numbers) Mult() int {
+	return n.num1 * n.num2
+}
+func (n Numbers) Div() float64 {
+	return float64(n.num1) / float64(n.num2)
+}
+func (n Numbers) Sub() int {
+	return n.num1 - n.num2
 }
 
 func main() {
@@ -140,6 +200,7 @@ func main() {
 	// for i := 0; i < len(nums); i++ {
 	// 	fmt.Println(nums[i])
 	// }
+	//первая переменная в range овтечает за нумерацию, второая за элементы
 	// for index, element := range nums { // цикл range. если не нужна переменная , то написать вместо нее _
 	// 	fmt.Printf("Index: %d Element: %d\n", index, element)
 	// }
@@ -286,11 +347,33 @@ func main() {
 	// var user User = User{name: "John", age: 23, password: "pass"} //тут можно указывать свойства в любом порядке
 
 	//топ способ
-	user := User{"John", 23, "pass"} // тут строго как задавали при объявлении
-	fmt.Println(user.name)
-	user.name = "Alex"
-	fmt.Println(user.name)
-	change(&user)
-	fmt.Println(user)
+	// user := User{"John", 23, "pass"} // тут строго как задавали при объявлении
+	// fmt.Println(user.name)
+	// user.name = "Alex"
+	// fmt.Println(user.name)
+	// change(&user)
+	// fmt.Println(user)
 
+	//ВЫЗОВ СТРУКТУРЫ
+	// 	fmt.Println(user.getName())
+	// 	user.setName("Michel")
+	// 	fmt.Println(user)
+	// 	fmt.Println(user.isElder())
+
+	// 	if user.isElder() {
+	// 		fmt.Println("come in")
+	// 	} else {
+	// 		fmt.Println("denied")
+	// 	}
+
+	// user := User{"John", 23, "pass", []int{23, 67, 89, 102, 42, 1}}
+	// fmt.Println(user.getHigherScore())
+
+	var i NumbersInterface   // присвоили интерфейс переменной
+	numbers := Numbers{9, 8} // создали структуру
+	i = numbers
+	fmt.Printf("Сумма: %d\n", i.Sum())
+	fmt.Printf("Произведение: %d\n", i.Mult())
+	fmt.Printf("Частное: %f\n", i.Div())
+	fmt.Printf("Разность: %d\n", i.Sub())
 }
