@@ -369,6 +369,7 @@ func main() {
 	// user := User{"John", 23, "pass", []int{23, 67, 89, 102, 42, 1}}
 	// fmt.Println(user.getHigherScore())
 
+	//ИНТЕРФЕЙСЫ
 	var i NumbersInterface   // присвоили интерфейс переменной
 	numbers := Numbers{9, 8} // создали структуру
 	i = numbers
@@ -377,3 +378,4 @@ func main() {
 	fmt.Printf("Частное: %f\n", i.Div())
 	fmt.Printf("Разность: %d\n", i.Sub())
 }
+
