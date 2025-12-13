@@ -7,6 +7,51 @@ import (
 	//"math"
 )
 
+//самая простая функция
+// func sum(a int, b int) int {
+// 	result := a + b
+// 	return result
+// }
+
+//функция с возвратом нескольких переменных
+// func math_func(a int, b int) (sum int, subtraction int, mult int, div int) {
+// 	sum = a + b
+// 	subtraction = a - b
+// 	mult = a * b
+// 	div = a / b
+// 	return
+// }
+
+// функция с ссылкой на функцию, находящуюся в главной функции
+// func test(some_func func(int) int) {
+// 	fmt.Println(some_func(25))
+// }
+
+//возвращение функции внутри функции
+// func test(x string) func() {
+// 	return func() {
+// 		fmt.Println(x)
+// 	}
+// }
+
+// функция для изменения переменной
+// func change(str *string) {
+// 	*str = "LOL"
+// }
+
+// создание структуры
+type User struct {
+	name     string
+	age      int64
+	password string
+}
+
+func change(u *User) {
+	u.name = "Kate"
+	u.age = 15
+	u.password = "newpass"
+}
+
 func main() {
 	fmt.Println("Hello, Alexey!")
 
@@ -63,13 +108,13 @@ func main() {
 	// fmt.Println("реши кв уравнение")
 
 	// fmt.Println("Введите а")
-	// fmt.Scan(&a)
+	// fmt.Scan(&a) //ввод переменной
 
 	// fmt.Println("Введите b")
-	// fmt.Scan(&b)
+	// fmt.Scan(&b) //ввод переменной
 
 	// fmt.Println("Введите c")
-	// fmt.Scan(&c)
+	// fmt.Scan(&c) //ввод переменной
 
 	// d := (b * b) - 4*(a*c)
 
@@ -142,8 +187,6 @@ func main() {
 	//math.Floor(a) - округление в меньшую сторону
 	//math.Round(a) - округление по правилам математики
 
-	
-
 	//массивы  (многомерные массивы дефолт синтаксис)
 	// names := [3]string{"kate", "alex", "john"} // увеличить размер массива нельзя
 
@@ -197,5 +240,57 @@ func main() {
 	// el, status := money["dollars"] //el - елемент карты по индетификатору, status - переменная boolean (true - if el is exist, false - if its not)
 	// fmt.Println(el, status)
 
-}
+	// функции
+	// sum(5, 9) // вызов функции
+	// value := sum(5, 9)
+	// fmt.Println(value)
 
+	// s, su, m, d := math_func(3, 5) // вызов функции с возвратом несокльких переменных
+	// fmt.Println(s, su, m, d)
+
+	// a := func(x int, y int) int { // создание функции внутри главной
+	// 	return x + y
+	// }
+	// sum := a(3, 9)
+	// fmt.Println(sum)
+
+	//задание функции внутри главной
+	// square := func(a int) int {
+	// 	return a * a
+	// }
+	// test(square) // ссылка на функцию
+
+	//test("hello")() //более простой вызов функции
+
+	//указатели
+	// a := 5
+	// pointer := &a
+	// fmt.Println(pointer)  // адрес переменной
+	// fmt.Println(*pointer) // значение переменной по адресу
+	// s := "LLL"
+	// fmt.Println(s)
+
+	//другая запись
+	// var point *string = &s
+	// change(point)
+	// change(&s) // изменяем переменную(без указателя мы просто копируем переменную)
+	// fmt.Println(s)
+	// num := 9
+	// b := &num
+	// *b = 35
+	// fmt.Println(*b)
+
+	//структуры  (кастомный тип данынх)
+
+	//плохой способ
+	// var user User = User{name: "John", age: 23, password: "pass"} //тут можно указывать свойства в любом порядке
+
+	//топ способ
+	user := User{"John", 23, "pass"} // тут строго как задавали при объявлении
+	fmt.Println(user.name)
+	user.name = "Alex"
+	fmt.Println(user.name)
+	change(&user)
+	fmt.Println(user)
+
+}
