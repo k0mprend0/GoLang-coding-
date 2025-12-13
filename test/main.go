@@ -10,6 +10,35 @@ import (
 func main() {
 	fmt.Println("Hello, Alexey!")
 
+	//калькулятор
+	// fmt.Println("Youve just started a calculator!")
+	// fmt.Println("Wat action do u wanna do (+, -, *, /, sqrt, ^) ?")
+
+	// var action string
+	// fmt.Scan(&action)
+
+	// var a, b float64
+	// fmt.Println("Enter ur 1st number")
+	// fmt.Scan(&a)
+
+	// fmt.Println("Enter ur 2nd number")
+	// fmt.Scan(&b)
+
+	// switch {
+	// case action == "+":
+	// 	fmt.Println("a + b = " + fmt.Sprint(a+b))
+	// case action == "-":
+	// 	fmt.Println("a - b = " + fmt.Sprint(a-b))
+	// case action == "*":
+	// 	fmt.Println("a * b = " + fmt.Sprint(a*b))
+	// case action == "/":
+	// 	fmt.Println("a / b = " + fmt.Sprint(a/b))
+	// case action == "sqrt":
+	// 	fmt.Println("a√b = " + fmt.Sprint(b**&a))
+	// case action == "^":
+	// 	fmt.Println("a ^ b == " + fmt.Sprint())
+	// }
+
 	// введение
 	// var (
 	// 	age     int    = 18
@@ -113,34 +142,7 @@ func main() {
 	//math.Floor(a) - округление в меньшую сторону
 	//math.Round(a) - округление по правилам математики
 
-	//калькулятор
-	// fmt.Println("Youve just started a calculator!")
-	// fmt.Println("Wat action do u wanna do (+, -, *, /, sqrt, ^) ?")
-
-	// var action string
-	// fmt.Scan(&action)
-
-	// var a, b float64
-	// fmt.Println("Enter ur 1st number")
-	// fmt.Scan(&a)
-
-	// fmt.Println("Enter ur 2nd number")
-	// fmt.Scan(&b)
-
-	// switch {
-	// case action == "+":
-	// 	fmt.Println("a + b = " + fmt.Sprint(a+b))
-	// case action == "-":
-	// 	fmt.Println("a - b = " + fmt.Sprint(a-b))
-	// case action == "*":
-	// 	fmt.Println("a * b = " + fmt.Sprint(a*b))
-	// case action == "/":
-	// 	fmt.Println("a / b = " + fmt.Sprint(a/b))
-	// case action == "sqrt":
-	// 	fmt.Println("a√b = " + fmt.Sprint(b**&a))
-	// case action == "^":
-	// 	fmt.Println("a ^ b == " + fmt.Sprint())
-	// }
+	
 
 	//массивы  (многомерные массивы дефолт синтаксис)
 	// names := [3]string{"kate", "alex", "john"} // увеличить размер массива нельзя
@@ -196,3 +198,4 @@ func main() {
 	// fmt.Println(el, status)
 
 }
+
