@@ -7,13 +7,13 @@ import (
 	//"math"
 )
 
-//самая простая функция
+//САМАЯ ПРОСТАЯ ФУНКЦИЯ
 // func sum(a int, b int) int {
 // 	result := a + b
 // 	return result
 // }
 
-//функция с возвратом нескольких переменных
+//ФУНКЦИЯ С ВОЗВРАТОМ НЕСКОЛЬКИХ ПЕРЕМЕННЫХ
 // func math_func(a int, b int) (sum int, subtraction int, mult int, div int) {
 // 	sum = a + b
 // 	subtraction = a - b
@@ -22,24 +22,24 @@ import (
 // 	return
 // }
 
-// функция с ссылкой на функцию, находящуюся в главной функции
+// ФУНКЦИЯ С ССЫЛКОЙ НА ФУНКЦИЮ, НАХОДЯЩУЮСЯ ВНУТРИ ГЛАВНОЙ ФУНКЦИИ
 // func test(some_func func(int) int) {
 // 	fmt.Println(some_func(25))
 // }
 
-//возвращение функции внутри функции
+//ВОЗВРАЩЕНИЕ ФУНКЦИИ ВНУТРИ ФУНКЦИИ
 // func test(x string) func() {
 // 	return func() {
 // 		fmt.Println(x)
 // 	}
 // }
 
-// функция для изменения переменной
+// ФУНКЦИЯ ДЛЯ ИЗМЕНЕНИЯ ПЕРЕМЕННОЙ
 // func change(str *string) {
 // 	*str = "LOL"
 // }
 
-// создание структуры
+// СОЗДАНИЕ СТРУКТУРЫ
 type User struct {
 	name     string
 	age      int64
@@ -55,7 +55,7 @@ func change(u *User) {
 func main() {
 	fmt.Println("Hello, Alexey!")
 
-	//калькулятор
+	//КАЛЬКУЛЯТОР
 	// fmt.Println("Youve just started a calculator!")
 	// fmt.Println("Wat action do u wanna do (+, -, *, /, sqrt, ^) ?")
 
@@ -84,7 +84,7 @@ func main() {
 	// 	fmt.Println("a ^ b == " + fmt.Sprint())
 	// }
 
-	// введение
+	// ВВЕДЕНИЕ
 	// var (
 	// 	age     int    = 18
 	// 	message string = "Hello! Im Alexey and Im studin' in MIREA University."
@@ -103,7 +103,7 @@ func main() {
 	// 	fmt.Println("go suck ur paw")
 	// }
 
-	//кв ур-е ифами
+	//КВ УР-Е ИФАМИ
 	// var a, b, c float64
 	// fmt.Println("реши кв уравнение")
 
@@ -135,7 +135,7 @@ func main() {
 	// 	fmt.Println("уравнение не имеет корней!")
 	// }
 
-	// range и цикл
+	// RANGE И ЦИКЛ
 	// nums := []int{1, 2, 3, 4, 5}
 	// for i := 0; i < len(nums); i++ {
 	// 	fmt.Println(nums[i])
@@ -144,7 +144,7 @@ func main() {
 	// 	fmt.Printf("Index: %d Element: %d\n", index, element)
 	// }
 
-	//матрицы
+	//МАТРИЦЫ
 	// matrix := [][]int{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}
 	// for _, row := range matrix {
 	// 	for _, col := range row {
@@ -153,7 +153,7 @@ func main() {
 	// 	fmt.Println()
 	// }
 
-	// switch - практичная замена If. табуляция критична!!
+	// SWITCH - практичная замена If. табуляция критична!!
 	// /w strings
 	// name := "Kotlin"
 
@@ -187,14 +187,14 @@ func main() {
 	//math.Floor(a) - округление в меньшую сторону
 	//math.Round(a) - округление по правилам математики
 
-	//массивы  (многомерные массивы дефолт синтаксис)
+	//МАССИВЫ  (многомерные массивы дефолт синтаксис)
 	// names := [3]string{"kate", "alex", "john"} // увеличить размер массива нельзя
 
 	// for i := 0; i < len(names); i++ { // вывод массива поэлементно
 	// 	fmt.Println(names[i])
 	// }
 
-	// // ср арифм
+	// // СР АРИФМ
 	// marks := [5]float64{5, 2, 4, 5, 3}
 	// var sum float64 = 0
 
@@ -205,7 +205,7 @@ func main() {
 	// var res float64 = sum / float64(len(marks))
 	// fmt.Println(math.Round(res)) // округлили по правилам математики
 
-	// срезы (динамический массив)
+	// СРЕЗЫ (динамический массив)
 	// slice := []int{3, 1, 2, 7, 4}
 
 	// slice = append(slice, 0) //добавление элемента в срез
@@ -223,7 +223,7 @@ func main() {
 
 	// %d - для форматирования чисел (decimal), %s - для форматирования строк (string), %f - для форматирования float, %t - для форматирования boolean
 
-	// карты
+	// КАРТЫ
 	// var money map[string]int = map[string]int{ // !!!карты сортируют по алфавиту
 	// money := map[string]int{
 	// 	"dollars": 1000,
@@ -240,7 +240,7 @@ func main() {
 	// el, status := money["dollars"] //el - елемент карты по индетификатору, status - переменная boolean (true - if el is exist, false - if its not)
 	// fmt.Println(el, status)
 
-	// функции
+	// ФУНКЦИИ
 	// sum(5, 9) // вызов функции
 	// value := sum(5, 9)
 	// fmt.Println(value)
@@ -262,7 +262,7 @@ func main() {
 
 	//test("hello")() //более простой вызов функции
 
-	//указатели
+	//УКАЗАТЕЛИ
 	// a := 5
 	// pointer := &a
 	// fmt.Println(pointer)  // адрес переменной
@@ -280,7 +280,7 @@ func main() {
 	// *b = 35
 	// fmt.Println(*b)
 
-	//структуры  (кастомный тип данынх)
+	//СТРУКТУРЫ  (кастомный тип данынх)
 
 	//плохой способ
 	// var user User = User{name: "John", age: 23, password: "pass"} //тут можно указывать свойства в любом порядке
