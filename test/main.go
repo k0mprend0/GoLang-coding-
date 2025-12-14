@@ -117,12 +117,12 @@ import (
 // 	ch2 <- 77
 // }
 
-func say(greet string, ch chan int) {
-	for i := 0; i <= 5; i++ {
-		ch <- i
-	}
-	close(ch) //закрытие канала
-}
+// func say(greet string, ch chan int) {
+// 	for i := 0; i <= 5; i++ {
+// 		ch <- i
+// 	}
+// 	close(ch) //закрытие канала
+// }
 
 func main() {
 	fmt.Println("Hello, Alexey!")
@@ -392,6 +392,7 @@ func main() {
 
 	//РАБОТА С ФАЙЛАМИ
 	//создание файла
+	//библиотека ioutil (отстой)
 	// data := []byte("appending text to new file")
 	// e := ioutil.WriteFile("test.txt", data, 0600) // 0600 - дефолтное разрешение
 
@@ -399,15 +400,21 @@ func main() {
 	// 	fmt.Println("Cant create a new file \n", e)
 	// }
 
-	// работа с библиотекой ioutil
-	// file_data, err := ioutil.ReadFile("hello.go.txt") //изначальный тип file_data - byte
-	// if err != nil {                                   //if err exist
+	//работа с библиотекой os (класс топ)
+	// file, err := os.Create("text.txt")
+	// if err != nil { //if err exist
 	// 	fmt.Println("Cant read a file \n", err)
+	// 	os.Exit(1) //стоп программы
 	// }
+	// defer file.Close() // после проверки на ошибку закрытие соеденения с файлом
+	// data := "appending text to a new file"
+	// file.WriteString(data)
+
+	// file_data, _ := os.ReadFile(file.Name())
 	// fmt.Println(string(file_data))
 
 	// //удаление файла
-	// os.Remove("test.txt")
+	// os.Remove("text.txt")
 
 	//СОЗДАНИЕ КАНАЛА
 	// ch := make(chan string) // chan -тип данных для канала
@@ -419,9 +426,22 @@ func main() {
 	// fmt.Println(<-ch, <-ch2)
 
 	//ЗАКРЫТИЕ КАНАЛА
-	ch := make(chan int)
-	go say("Hello GoLang", ch)
-	for a := range ch {
-		fmt.Println(a)
+	// ch := make(chan int)
+	// go say("Hello GoLang", ch)
+	// for a := range ch {
+	// 	fmt.Println(a)
+	// }
+
+	//ОПЕРАТОР GOTO (ХРЕНОВЫЙ ОПЕРАТОР/ОПЕРАТОР БЕЗУСЛОВНОГО ПЕРЕХОДА)
+	i := 0
+LOOP: // создание метки
+	if i > 50 {
+		goto END
 	}
+
+	fmt.Println(i)
+	i++
+	goto LOOP
+
+END:
 }
