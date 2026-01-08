@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
+	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
@@ -12,6 +13,7 @@ import (
 func main() {
 	myApp := app.New()
 	window := myApp.NewWindow("Mini calculator")
+	window.Resize(fyne.NewSize(400, 320))
 
 	label1 := widget.NewLabel("Enter ur 1st number")
 	entry1 := widget.NewEntry()
