@@ -14,30 +14,64 @@ import (
 func main() {
 	myApp := app.New()
 	window := myApp.NewWindow("My app")
-	window.Resize(fyne.NewSize(250, 250))
+	window.Resize(fyne.NewSize(400, 400))
 	myApp.Settings().SetTheme(theme.DarkTheme())
 
-	label := widget.NewLabel("Mini notepad")
+	label := widget.NewLabel("Registration")
+	label.TextStyle = fyne.TextStyle{Bold: true} //изменение стилей текста
+	label.Move(fyne.NewPos(137, 3))
 
-	entry := widget.NewMultiLineEntry()
-	entry.SetPlaceHolder("Type sth here...")
-	//entry.Wrapping = fyne.TextWrapBreak //адаптивно к размерам окна
-	//entry.Wrapping = fyne.TextWrapOff //размеры приложения адаптируются к длине строки
+	username := widget.NewEntry()
+	username.Resize(fyne.NewSize(300, 40))
+	username.Move(fyne.NewPos(50, 50))
+	username.SetPlaceHolder("Enter username")
 
-	button := widget.NewButton("Save", func() {
-		file, err := os.Create("Info.txt")
+	password := widget.NewPasswordEntry()
+	password.Resize(fyne.NewSize(300, 40))
+	password.Move(fyne.NewPos(50, 110))
+	password.SetPlaceHolder("Enter password")
+
+	email := widget.NewEntry()
+	email.Resize(fyne.NewSize(300, 40))
+	email.Move(fyne.NewPos(50, 170))
+	email.SetPlaceHolder("Enter your email")
+
+	info := widget.NewMultiLineEntry()
+	info.Resize(fyne.NewSize(300, 80))
+	info.Move(fyne.NewPos(50, 230))
+	info.SetPlaceHolder("Enter more info")
+
+	submit := widget.NewButton("Register", func() {
+		file, err := os.Create("user.txt")
+
 		if err != nil {
 			fmt.Println("Error! - ", err)
 			os.Exit(1)
 		}
 		defer file.Close()
 
-		file.WriteString(entry.Text)
+		data := fmt.Sprintf(
+			"Username: %s\nPassword: %s\nEmail: %s\nInfo: %s\n",
+			username.Text,
+			password.Text,
+			email.Text,
+			info.Text,
+		)
+		file.WriteString(data)
 	})
+	submit.Resize(fyne.NewSize(200, 40))
+	submit.Move(fyne.NewPos(100, 340))
 
-	content := container.NewVBox(label, entry, button)
+	cont := container.NewWithoutLayout(
+		label,
+		username,
+		password,
+		email,
+		info,
+		submit,
+	)
 
-	window.SetContent(content)
+	window.SetContent(cont)
 
 	//window.SetContent(widget.NewLabel("Hello World!"))
 	window.ShowAndRun()
