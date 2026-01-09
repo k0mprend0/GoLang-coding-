@@ -1,9 +1,6 @@
 package main
 
 import (
-	"fmt"
-	"strconv"
-
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
@@ -13,39 +10,44 @@ import (
 func main() {
 	myApp := app.New()
 	window := myApp.NewWindow("Mini calculator")
-	window.Resize(fyne.NewSize(400, 320))
+	window.Resize(fyne.NewSize(300, 500))
 
-	label1 := widget.NewLabel("Enter ur 1st number")
-	entry1 := widget.NewEntry()
+	title := widget.NewLabel("Оформление заказа")
 
-	label2 := widget.NewLabel("Enter ur 2nd number")
-	entry2 := widget.NewEntry()
+	name_label := widget.NewLabel("Ваше имя: ")
+	name := widget.NewEntry()
 
-	answer := widget.NewLabel("")
+	food_label := widget.NewLabel("Выберите еду для заказа: ")
 
-	button := widget.NewButton("Start calculating", func() {
-		n1, err1 := strconv.ParseFloat(entry1.Text, 64) // конвертация из str в float (64 - колво бит)
-		n2, err2 := strconv.ParseFloat(entry2.Text, 64)
+	food := widget.NewCheckGroup([]string{"Pizza", "Cake", "Nuggets", "Burgers", "Soda"}, func(s []string) {})
 
-		if err1 != nil || err2 != nil {
-			answer.SetText("Input error!")
-		} else {
-			sum := n1 + n2
-			sub := n1 - n2
-			mult := n1 * n2
-			div := n1 / n2
+	male_label := widget.NewLabel("Ваш пол: ")
+	male := widget.NewRadioGroup([]string{"Муж", "Жен", "Оно"}, func(s string) {})
 
-			answer.SetText(fmt.Sprintf("Сумма: %f\nРазность: %f\nПроизведение: %f\nЧастное: %f", sum, sub, mult, div))
+	result := widget.NewLabel("")
+
+	button := widget.NewButton("Order it!", func() {
+		username := name.Text
+		food_arr := food.Selected
+		male_val := male.Selected
+
+		result.SetText(username + "\n" + male_val + "\n")
+
+		for _, i := range food_arr {
+			result.SetText(result.Text + i + "\n")
 		}
 	})
 
 	window.SetContent(container.NewVBox(
-		label1,
-		entry1,
-		label2,
-		entry2,
+		title,
+		name_label,
+		name,
+		food_label,
+		food,
+		male_label,
+		male,
 		button,
-		answer,
+		result,
 	))
 
 	//window.SetContent(widget.NewLabel("Hello World!"))
