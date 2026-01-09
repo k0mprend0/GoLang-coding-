@@ -1,0 +1,10 @@
+  LINKS
+
+To add a link in ur app u need libary "net/url", command url.Parse() and, to add it in our app, widget.NewHyperLink()
+
+For example: 
+url, _ := url.Parse("https://web.telegram.org/k/#@biberanddol1k")
+
+link := widget.NewHyperlink("Telegram", url)
+
+The second var is error. We can skip it or process it.
