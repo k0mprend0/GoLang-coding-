@@ -3,6 +3,7 @@ package main
 import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
@@ -13,96 +14,54 @@ func main() {
 	window.Resize(fyne.NewSize(400, 400))
 	myApp.Settings().SetTheme(theme.DarkTheme())
 
-	card := widget.NewCard(
-		"VIMRT",
-		"Some info about esport team",
-		widget.NewAccordion(
-			widget.NewAccordionItem(
-				"Teams roster",
-				widget.NewAccordion(
-					widget.NewAccordionItem(
-						"Alexey k0mprend0 Popov",
-						widget.NewLabel("Info about player"),
-					),
-					widget.NewAccordionItem(
-						"Kirill Schaidt Podrez",
-						widget.NewLabel("Info about player"),
-					),
-					widget.NewAccordionItem(
-						"Artem artemixx Veselov",
-						widget.NewLabel("Info about player"),
-					),
-				),
-			),
-			widget.NewAccordionItem(
-				"Teams achivements",
-				widget.NewAccordion(
-					widget.NewAccordionItem(
-						"Faceit legue season 5",
-						widget.NewLabel("Info about tournament"),
-					),
-					widget.NewAccordionItem(
-						"Stealseries i-legue",
-						widget.NewLabel("Info about tournament"),
-					),
-					widget.NewAccordionItem(
-						"Blast Moscow",
-						widget.NewLabel("Info about tournament"),
-					),
-				),
-			),
+	//выпадающий список с доп вводом от пользователя
+	label := widget.NewLabel("")
 
-			widget.NewAccordionItem(
-				"More info",
-				widget.NewLabel("No info yet"),
-			),
-		),
+	sel := widget.NewSelectEntry(
+		[]string{
+			"Option 1",
+			"Option 2",
+			"Option 3",
+			"Option 4",
+			"Option 5",
+		},
 	)
 
-	window.SetContent(card)
+	sel.PlaceHolder = "Choose one or enter another option"
+
+	button := widget.NewButton("Get data", func() {
+		label.SetText("You peak " + sel.Text)
+	})
 
 	/*
-		text := "puhasdfihlgadfhasoufhsiuodhfgladhnfojkladbnfilhadgivojhasgiuoadgfoyusdatfiouahnmfoetriunvdgoiygdioyfgvnoidyfgnvioydghnmf8yovtoyiufegnv8ywg 97we9f vw97 rt97wew90puqhg97pwegpiu g8owe w9peuy7"
-		text_label := widget.NewLabel(text)
-		text_label.Wrapping = fyne.TextWrapBreak
-		item1 := widget.NewAccordionItem(
-			"Read more info",
-			text_label,
+
+		//обычный выпадаюзий список
+		label := widget.NewLabel("")
+
+		sel := widget.NewSelect(
+			[]string{
+				"Option 1",
+				"Option 2",
+				"Option 3",
+				"Option 4",
+				"Option 5",
+			},
+			nil,
 		)
 
-		item2 := widget.NewAccordionItem(
-			"Button",
-			widget.NewButton(
-				"Say Hello!",
-				func() {
-					fmt.Println("Hello!")
-				},
-			),
-		)
+		sel.PlaceHolder = "Choose one option"
 
-		item3 := widget.NewAccordionItem(
-			"Chapters",
-			widget.NewAccordion(
-				widget.NewAccordionItem(
-					"Chapter 1",
-					widget.NewLabel("Some text here..."),
-				),
-				widget.NewAccordionItem(
-					"Chapter 2",
-					widget.NewLabel("Some text from chapter 2 here..."),
-				),
-				widget.NewAccordionItem(
-					"Chapter 3",
-					widget.NewLabel("Very interesting text here..."),
-				),
-			),
-		)
-
-		accordion := widget.NewAccordion(item1, item2, item3)
-
-		window.SetContent(accordion)
+		button := widget.NewButton("Get data", func() {
+			label.SetText("You peak " + sel.Selected)
+		})
 	*/
-
+	window.SetContent(
+		container.NewVBox(
+			sel,
+			button,
+			label,
+		),
+	)
 	//window.SetContent(widget.NewLabel("Hello World!"))
 	window.ShowAndRun()
 }
