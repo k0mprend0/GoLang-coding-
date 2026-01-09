@@ -48,6 +48,7 @@ func main() {
 		info_item6,
 	)
 
+	//всплывающие при наведении окна меню
 	item1 := fyne.NewMenuItem("Options", nil)
 	item2 := fyne.NewMenuItem("Say", nil)
 
@@ -92,3 +93,4 @@ func main() {
 	//window.SetContent(widget.NewLabel("Hello World!"))
 	window.ShowAndRun()
 }
+
