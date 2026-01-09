@@ -6,9 +6,7 @@ import (
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/theme"
-	"fyne.io/fyne/v2/widget"
 )
 
 func main() {
@@ -17,61 +15,79 @@ func main() {
 	window.Resize(fyne.NewSize(400, 400))
 	myApp.Settings().SetTheme(theme.DarkTheme())
 
-	label := widget.NewLabel("Registration")
-	label.TextStyle = fyne.TextStyle{Bold: true} //изменение стилей текста
-	label.Move(fyne.NewPos(137, 3))
-
-	username := widget.NewEntry()
-	username.Resize(fyne.NewSize(300, 40))
-	username.Move(fyne.NewPos(50, 50))
-	username.SetPlaceHolder("Enter username")
-
-	password := widget.NewPasswordEntry()
-	password.Resize(fyne.NewSize(300, 40))
-	password.Move(fyne.NewPos(50, 110))
-	password.SetPlaceHolder("Enter password")
-
-	email := widget.NewEntry()
-	email.Resize(fyne.NewSize(300, 40))
-	email.Move(fyne.NewPos(50, 170))
-	email.SetPlaceHolder("Enter your email")
-
-	info := widget.NewMultiLineEntry()
-	info.Resize(fyne.NewSize(300, 80))
-	info.Move(fyne.NewPos(50, 230))
-	info.SetPlaceHolder("Enter more info")
-
-	submit := widget.NewButton("Register", func() {
-		file, err := os.Create("user.txt")
-
-		if err != nil {
-			fmt.Println("Error! - ", err)
-			os.Exit(1)
-		}
-		defer file.Close()
-
-		data := fmt.Sprintf(
-			"Username: %s\nPassword: %s\nEmail: %s\nInfo: %s\n",
-			username.Text,
-			password.Text,
-			email.Text,
-			info.Text,
-		)
-		file.WriteString(data)
+	file_item1 := fyne.NewMenuItem("New file", func() {
+		os.Create("created.txt")
 	})
-	submit.Resize(fyne.NewSize(200, 40))
-	submit.Move(fyne.NewPos(100, 340))
 
-	cont := container.NewWithoutLayout(
-		label,
-		username,
-		password,
-		email,
-		info,
-		submit,
+	file_item2 := fyne.NewMenuItem("Save", func() {
+		fmt.Println("File saved")
+	})
+
+	menu1 := fyne.NewMenu("File", file_item1, file_item2)
+
+	actions_item1 := fyne.NewMenuItem("Hello", func() { fmt.Println("Hello!") })
+	actions_item2 := fyne.NewMenuItem("Bye!", func() { fmt.Println("Goodbye!") })
+	actions_item3 := fyne.NewMenuItem("Button", func() { fmt.Println("Clicked!") })
+
+	menu2 := fyne.NewMenu("Actions", actions_item1, actions_item2, actions_item3)
+
+	info_item1 := fyne.NewMenuItem("Info", func() { fmt.Println("Info!") })
+	info_item2 := fyne.NewMenuItem("Clock me!", func() { fmt.Println("Info 'bout ur amazing app!") })
+	info_item3 := fyne.NewMenuItem("Print", func() { fmt.Println("Printed!") })
+	info_item4 := fyne.NewMenuItem("LOL", func() { fmt.Println("LOL!") })
+	info_item5 := fyne.NewMenuItem("Menu item", func() { fmt.Println("Menu item") })
+	info_item6 := fyne.NewMenuItem("xbox sucks", func() { fmt.Println("Thats true!") })
+
+	menu3 := fyne.NewMenu(
+		"Usless",
+		info_item1,
+		info_item2,
+		info_item3,
+		info_item4,
+		info_item5,
+		info_item6,
 	)
 
-	window.SetContent(cont)
+	item1 := fyne.NewMenuItem("Options", nil)
+	item2 := fyne.NewMenuItem("Say", nil)
+
+	item1.ChildMenu = fyne.NewMenu(
+		"",
+		fyne.NewMenuItem("Print", func() {
+			fmt.Println("Printed")
+		}),
+		fyne.NewMenuItem("Save", func() {
+			fmt.Println("Saved")
+		}),
+		fyne.NewMenuItem("Cut", func() {
+			fmt.Println("Cutted")
+		}),
+		fyne.NewMenuItem("Copy", func() {
+			fmt.Println("Copied")
+		}),
+		fyne.NewMenuItem("Delete", func() {
+			fmt.Println("Deleted")
+		}),
+	)
+
+	item2.ChildMenu = fyne.NewMenu(
+		"",
+		fyne.NewMenuItem("Hi", func() {
+			fmt.Println("Hello")
+		}),
+		fyne.NewMenuItem("Bye", func() {
+			fmt.Println("Goodbye")
+		}),
+		fyne.NewMenuItem("LOL", func() {
+			fmt.Println("Trolled")
+		}),
+	)
+
+	menu4 := fyne.NewMenu("Buttons", item1, item2)
+
+	main_menu := fyne.NewMainMenu(menu1, menu2, menu3, menu4)
+
+	window.SetMainMenu(main_menu)
 
 	//window.SetContent(widget.NewLabel("Hello World!"))
 	window.ShowAndRun()
