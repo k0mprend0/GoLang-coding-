@@ -29,3 +29,13 @@ To set a dark theme in ur app we need to use settings.
 myApp.Settings().SetTheme(theme.DarkTheme())
 
 myApp  is ur var 
+
+  APP ICON
+To set a custom icon on ur app we need to set it in programm.
+icon, _ := fyne.LoadResourceFromPath("icon.png")
+window.SetIcon(icon)
+And create exe file in terminal.
+fyne package -os windows -icon icon.png
+
+Firstly, move ur icon to root path.
+
