@@ -8,3 +8,14 @@ url, _ := url.Parse("https://web.telegram.org/k/#@biberanddol1k")
 link := widget.NewHyperlink("Telegram", url)
 
 The second var is error. We can skip it or process it.
+
+ 
+  IMAGES
+
+To add a image on your web app u need to use canvas libary and command window.SetContent(container.NewGridWithColumns())
+First var will be numbers of columns/rows, following will be ur images or sth
+
+For exapmle:
+image1 := canvas.NewImageFromFile("Screenshot_3.png")
+label := widget.NewLabel("Image")
+window.SetContent(container.NewGridWithColumns(2, image1, label))
