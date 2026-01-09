@@ -24,3 +24,8 @@ url, _ := fyne.LoadResourceFromURLString("")
 image := canvas.NewImageFromResource(url)
 
 Second var is an error, we also can skip or process it. We put url as string var 
+
+To set a dark theme in ur app we need to use settings.
+myApp.Settings().SetTheme(theme.DarkTheme())
+
+myApp  is ur var 
