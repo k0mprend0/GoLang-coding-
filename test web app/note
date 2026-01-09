@@ -1,5 +1,4 @@
   LINKS
-
 To add a link in ur app u need libary "net/url", command url.Parse() and, to add it in our app, widget.NewHyperLink()
 
 For example: 
@@ -11,7 +10,6 @@ The second var is error. We can skip it or process it.
 
  
   IMAGES
-
 To add a image on your web app u need to use canvas libary and command window.SetContent(container.NewGridWithColumns())
 First var will be numbers of columns/rows, following will be ur images or sth
 
@@ -19,3 +17,10 @@ For exapmle:
 image1 := canvas.NewImageFromFile("Screenshot_3.png")
 label := widget.NewLabel("Image")
 window.SetContent(container.NewGridWithColumns(2, image1, label))
+
+  IMAGES FROM INTERNET
+To add an image from internet we need resource. Resource - url to ur image.
+url, _ := fyne.LoadResourceFromURLString("")
+image := canvas.NewImageFromResource(url)
+
+Second var is an error, we also can skip or process it. We put url as string var 
