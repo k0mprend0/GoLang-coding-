@@ -39,3 +39,11 @@ fyne package -os windows -icon icon.png
 
 Firstly, move ur icon to root path.
 
+  CARDS
+Dont know what to say, just cool thing 
+card1 := widget.NewCard(
+		"My name is Alex!",
+		"Im trying to code on GoLang! Im just started!",
+		canvas.NewImageFromFile("img.jpg"),
+	)
+
