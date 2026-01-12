@@ -1,9 +1,10 @@
 package main
 
 import (
+	"fmt"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
@@ -14,38 +15,19 @@ func main() {
 	window.Resize(fyne.NewSize(400, 400))
 	myApp.Settings().SetTheme(theme.DarkTheme())
 
-	//автоматический показ/скрытие по нажатию кнопки
-	//visibility := true
+	names := []string{"Камень", "Ножницы", "Бумага"}
 
-	label := widget.NewLabel("Some text here...")
-	/*
-			button := widget.NewButton("Change visibility", func() {
-				if visibility {
-					label.Hide()
-				} else {
-					label.Show()
-				}
-
-				visibility = !visibility
-			})
-
-
-		check := widget.NewCheck("Hide", func(visibility bool) {
-			if visibility {
-				label.Hide()
-			} else {
-				label.Show()
-			}
-		})
-	*/
-
-	window.SetContent(
-		container.NewVBox(
-			label,
-			//button,
-			//check,
-		),
+	list := widget.NewList(
+		func() int { return len(names) },
+		func() fyne.CanvasObject {
+			return widget.NewButton("Press it", func() { fmt.Println("...") })
+		},
+		func(id widget.ListItemID, obj fyne.CanvasObject) {
+			obj.(*widget.Button).SetText(names[id])
+		},
 	)
+
+	window.SetContent(list)
 	//window.SetContent(widget.NewLabel("Hello World!"))
 	window.ShowAndRun()
 }
