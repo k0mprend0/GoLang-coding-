@@ -14,52 +14,36 @@ func main() {
 	window.Resize(fyne.NewSize(400, 400))
 	myApp.Settings().SetTheme(theme.DarkTheme())
 
-	//выпадающий список с доп вводом от пользователя
-	label := widget.NewLabel("")
+	//автоматический показ/скрытие по нажатию кнопки
+	//visibility := true
 
-	sel := widget.NewSelectEntry(
-		[]string{
-			"Option 1",
-			"Option 2",
-			"Option 3",
-			"Option 4",
-			"Option 5",
-		},
-	)
-
-	sel.PlaceHolder = "Choose one or enter another option"
-
-	button := widget.NewButton("Get data", func() {
-		label.SetText("You peak " + sel.Text)
-	})
-
+	label := widget.NewLabel("Some text here...")
 	/*
+			button := widget.NewButton("Change visibility", func() {
+				if visibility {
+					label.Hide()
+				} else {
+					label.Show()
+				}
 
-		//обычный выпадаюзий список
-		label := widget.NewLabel("")
+				visibility = !visibility
+			})
 
-		sel := widget.NewSelect(
-			[]string{
-				"Option 1",
-				"Option 2",
-				"Option 3",
-				"Option 4",
-				"Option 5",
-			},
-			nil,
-		)
 
-		sel.PlaceHolder = "Choose one option"
-
-		button := widget.NewButton("Get data", func() {
-			label.SetText("You peak " + sel.Selected)
+		check := widget.NewCheck("Hide", func(visibility bool) {
+			if visibility {
+				label.Hide()
+			} else {
+				label.Show()
+			}
 		})
 	*/
+
 	window.SetContent(
 		container.NewVBox(
-			sel,
-			button,
 			label,
+			//button,
+			//check,
 		),
 	)
 	//window.SetContent(widget.NewLabel("Hello World!"))
