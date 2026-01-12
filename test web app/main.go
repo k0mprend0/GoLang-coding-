@@ -3,7 +3,7 @@ package main
 import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/dialog"
+	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
@@ -14,83 +14,50 @@ func main() {
 	window.Resize(fyne.NewSize(400, 400))
 	myApp.Settings().SetTheme(theme.DarkTheme())
 
-	//types of dialog windows (not all, just some of 'em)
-	//1 Information
-	//2 Confirm
-	//3 CustomConfirm
-	//4 Error
-	//5 Custom
-
 	/*
-		// 1 Information
-		button := widget.NewButton("Click me", func() {
-			dialog.ShowInformation(
-				"Information about programm",
-				"Quis anim nisi in velit veniam ad dolore elit reprehenderit aliqua.",
-				window,
+		window2 := myApp.NewWindow("window 2")
+		window2.Resize(fyne.NewSize(400, 400))
+
+		button := widget.NewButton("Open new window", func() {
+			window2.Show()
+			window2.SetContent(
+				widget.NewLabel("Nostrud ullamco adipisicing in ea ad ut proident mollit."),
 			)
-		})
+		}
 	*/
 
-	/*
-		// 2 Confirm
-		button := widget.NewButton("Click me", func() {
-			dialog.ShowConfirm(
-				"Do you agree that Grisha dumbass?",
-				"This is annonymus pool",
-				func(b bool) {
-					if b {
-						fmt.Println("This is correct!")
-					} else {
-						fmt.Println("Incorrect")
-					}
-				},
-				window,
-			)
-		})
-	*/
+	window2 := myApp.NewWindow("Window 2")
+	window2.Resize(fyne.NewSize(400, 400))
 
-	/*
-		// 3 CustomConfirm
-		button := widget.NewButton("Click me", func() {
-			dialog.ShowCustomConfirm(
-				"Grisha daun?",
-				"YES!",
-				"OF COURSE!",
-				widget.NewLabel("Commodo veniam et Lorem voluptate."),
-				func(b bool) {
-					if b {
-						fmt.Println("This is correct!")
-					} else {
-						fmt.Println("PERFECT")
-					}
-				},
-				window,
-			)
-		})
-	*/
-
-	/*
-		// 4 Error
-		button := widget.NewButton("Click me", func() {
-			dialog.ShowError(
-				errors.New("Unknown issue"),
-				window,
-			)
-		})
-	*/
-
-	// 5 Custom
-	button := widget.NewButton("Click me", func() {
-		dialog.ShowCustom(
-			"Information for user",
-			"I have read it",
-			widget.NewLabel("Duis nulla eiusmod ullamco consequat ea."),
-			window,
+	entry := widget.NewMultiLineEntry()
+	button := widget.NewButton("Show the text", func() {
+		text := widget.NewLabel(entry.Text)
+		text.Wrapping = fyne.TextWrapBreak
+		window2.SetContent(
+			container.NewVScroll(
+				text,
+			),
 		)
+		window2.Show()
 	})
 
-	window.SetContent(button)
+	close2 := widget.NewButton(
+		"Close 2nd window",
+		func() {
+			window2.Close() // destroy window
+			//window2.Hide() // hide window from user
+		},
+	)
+
+	window.SetContent(
+		container.NewVBox(
+			entry,
+			button,
+			close2,
+		),
+	)
 	//window.SetContent(widget.NewLabel("Hello World!"))
-	window.ShowAndRun()
+	window.Show()      // !!! change to show6 now ShowAndRun
+	window.SetMaster() // makes current window main
+	myApp.Run()
 }
