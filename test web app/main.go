@@ -1,10 +1,12 @@
 package main
 
 import (
+	"fmt"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/theme"
+	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 )
 
@@ -12,52 +14,84 @@ func main() {
 	myApp := app.New()
 	window := myApp.NewWindow("My app")
 	window.Resize(fyne.NewSize(400, 400))
-	myApp.Settings().SetTheme(theme.DarkTheme())
+	//myApp.Settings().SetTheme(theme.DarkTheme())
 
 	/*
-		window2 := myApp.NewWindow("window 2")
-		window2.Resize(fyne.NewSize(400, 400))
-
-		button := widget.NewButton("Open new window", func() {
-			window2.Show()
-			window2.SetContent(
-				widget.NewLabel("Nostrud ullamco adipisicing in ea ad ut proident mollit."),
-			)
-		}
+		1 GridLayout
+		2 GridWarpLayout
+		3 CenterLayout
 	*/
 
-	window2 := myApp.NewWindow("Window 2")
-	window2.Resize(fyne.NewSize(400, 400))
+	/*
+		// 1 GridLayout
+		l1 := widget.NewLabel("Label 1")
+		l2 := widget.NewLabel("Label 2")
+		l3 := widget.NewLabel("Label 3")
+		l4 := widget.NewLabel("Label 4")
+		l5 := widget.NewLabel("Label 5")
+		l6 := widget.NewLabel("Label 6")
 
-	entry := widget.NewMultiLineEntry()
-	button := widget.NewButton("Show the text", func() {
-		text := widget.NewLabel(entry.Text)
-		text.Wrapping = fyne.TextWrapBreak
-		window2.SetContent(
-			container.NewVScroll(
-				text,
-			),
+		cont := container.New(
+			layout.NewGridLayout(2),
+			l1,
+			l2,
+			l3,
+			l4,
+			l5,
+			l6,
 		)
-		window2.Show()
-	})
+	*/
 
-	close2 := widget.NewButton(
-		"Close 2nd window",
-		func() {
-			window2.Close() // destroy window
-			//window2.Hide() // hide window from user
-		},
+	/*
+		// 2 GridWarpLayout
+		l1 := widget.NewLabel("Label 1")
+		l2 := widget.NewLabel("Label 2")
+		l3 := widget.NewLabel("Label 3")
+		l4 := widget.NewLabel("Label 4")
+		l5 := widget.NewLabel("Label 5")
+		l6 := widget.NewLabel("Label 6")
+
+		cont := container.New(
+			layout.NewGridWrapLayout(fyne.NewSize(100, 100)),
+			l1,
+			l2,
+			l3,
+			l4,
+			l5,
+			l6,
+		)
+	*/
+
+	// 3 CenterLayout
+	//img := canvas.NewImageFromFile("IMG_9368.jpeg")
+	//img.FillMode = canvas.ImageFillOriginal
+	//text := canvas.NewText("TEXT", color.RGBA{39, 255, 0, 255})
+
+	label := widget.NewLabel("Label")
+	entry := widget.NewEntry()
+	button := widget.NewButton("Button", func() { fmt.Println(entry.Text) })
+
+	cont_l := container.New(
+		layout.NewCenterLayout(),
+		label,
 	)
 
-	window.SetContent(
-		container.NewVBox(
-			entry,
-			button,
-			close2,
-		),
+	cont_e := container.New(
+		layout.NewCenterLayout(),
+		entry,
 	)
+
+	cont_b := container.New(
+		layout.NewCenterLayout(),
+		button,
+	)
+
+	window.SetContent(container.NewVBox(
+		cont_l,
+		cont_e,
+		cont_b,
+	))
 	//window.SetContent(widget.NewLabel("Hello World!"))
-	window.Show()      // !!! change to show6 now ShowAndRun
-	window.SetMaster() // makes current window main
-	myApp.Run()
+	window.ShowAndRun() // !!! change to show6 now ShowAndRun
+	//window.SetMaster() // makes current window main
 }
