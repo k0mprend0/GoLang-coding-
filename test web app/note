@@ -47,3 +47,4 @@ card1 := widget.NewCard(
 		canvas.NewImageFromFile("img.jpg"),
 	)
 
+table.SetColumnWidth(0, 200) // here is size changing to columns 
