@@ -1,8 +1,7 @@
 package main
 
 import (
-	"fmt"
-	"strconv"
+	"log"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
@@ -17,67 +16,38 @@ func main() {
 	window.Resize(fyne.NewSize(800, 500))
 	myApp.Settings().SetTheme(theme.DarkTheme())
 
-	data := map[string][]int{
-		"Denis": {5, 5, 5, 4, 4},
-		"Ivan":  {2, 2, 4, 5, 3},
-		"Alex":  {5, 5, 2, 5, 5},
-	}
+	username := widget.NewEntry()
+	email := widget.NewEntry()
+	password := widget.NewPasswordEntry()
 
-	var kx string
-
-	var names []string
-	for key := range data {
-		names = append(names, key)
-		kx = key
-	}
-
-	table := widget.NewTable(
-		func() (rows int, cols int) {
-			return len(names), len(data[kx]) + 1
-		},
-		func() fyne.CanvasObject {
-			return widget.NewLabel("Default text")
-		},
-		func(tci widget.TableCellID, co fyne.CanvasObject) {
-			if tci.Col == 0 {
-				co.(*widget.Label).SetText(names[tci.Row])
-			} else {
-				co.(*widget.Label).SetText(fmt.Sprint(data[names[tci.Row]][tci.Col-1]))
-			}
-		},
+	form := widget.NewForm(
+		widget.NewFormItem("Username", username),
+		widget.NewFormItem("Email", email),
+		widget.NewFormItem("Password", password),
 	)
 
-	row := widget.NewEntry()
-	row.SetPlaceHolder("Row...")
+	form.OnSubmit = func() {
+		log.Println("Form submited!")
 
-	col := widget.NewEntry()
-	col.SetPlaceHolder("Col...")
-
-	button := widget.NewButton("Scroll", func() {
-		row_value, _ := strconv.Atoi(row.Text)
-		col_value, _ := strconv.Atoi(col.Text)
-
-		table.Select(
-			widget.TableCellID{
-				Row: row_value,
-				Col: col_value,
-			},
+		log.Printf(
+			"Username: %s\nEmail: %s\nPassword: %s\n",
+			username.Text,
+			email.Text,
+			password.Text,
 		)
+	}
 
-		table.ScrollTo(
-			widget.TableCellID{
-				Row: row_value,
-				Col: col_value,
-			},
-		)
-	})
+	form.SubmitText = "Send"
+
+	form.OnCancel = func() {
+		myApp.Quit()
+	}
+
+	form.CancelText = "Quit"
 
 	window.SetContent(
 		container.NewVBox(
-			row,
-			col,
-			button,
-			table,
+			form,
 		),
 	)
 	window.ShowAndRun()
