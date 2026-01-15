@@ -15,21 +15,23 @@ func main() {
 	window.Resize(fyne.NewSize(800, 500))
 	myApp.Settings().SetTheme(theme.DarkTheme())
 
-	names := []string{
-		"Kate",
-		"John",
-		"Anrew",
+	data := map[string][]int{
+		"Denis": {5, 5, 5, 4, 4},
+		"Ivan":  {2, 2, 4, 5, 3},
+		"Alex":  {5, 5, 2, 5, 5},
 	}
 
-	marks := [][]int{
-		{5, 3, 5},
-		{4, 5, 2},
-		{2, 4, 4},
+	var kx string
+
+	var names []string
+	for key := range data {
+		names = append(names, key)
+		kx = key
 	}
 
 	table := widget.NewTable(
 		func() (rows int, cols int) {
-			return len(names), len(marks[0]) + 1
+			return len(names), len(data[kx]) + 1
 		},
 		func() fyne.CanvasObject {
 			return widget.NewLabel("Default text")
@@ -38,7 +40,7 @@ func main() {
 			if tci.Col == 0 {
 				co.(*widget.Label).SetText(names[tci.Row])
 			} else {
-				co.(*widget.Label).SetText(fmt.Sprint(marks[tci.Row][tci.Col-1]))
+				co.(*widget.Label).SetText(fmt.Sprint(data[names[tci.Row]][tci.Col-1]))
 			}
 		},
 	)
