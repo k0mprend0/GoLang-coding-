@@ -1,11 +1,10 @@
 package main
 
 import (
-	"image/color"
+	"io"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/theme"
@@ -15,39 +14,31 @@ import (
 func main() {
 	myApp := app.New()
 	window := myApp.NewWindow("My app")
-	window.Resize(fyne.NewSize(400, 400))
+	window.Resize(fyne.NewSize(800, 500))
 	myApp.Settings().SetTheme(theme.DarkTheme())
 
-	text := canvas.NewText("Text to color...", color.White)
+	entry := widget.NewMultiLineEntry()
+	entry.Resize(fyne.NewSize(600, 300))
+	entry.Move(fyne.NewPos(100, 135))
 
-	rec := canvas.NewRectangle(color.White)
-	rec.SetMinSize(fyne.NewSize(300, 300))
-
-	// dialog window ColorPicker
-	cpt := dialog.NewColorPicker(
-		"Color picker",
-		"Choose your own color",
-		func(c color.Color) {
-			text.Color = c
-			text.Refresh()
-
-			rec.FillColor = c
-			rec.Refresh()
-		},
-		window,
-	)
-
-	button := widget.NewButton("Color picker", func() {
-		cpt.Show()
+	button := widget.NewButton("Open file", func() {
+		dialog.ShowFileOpen(
+			func(reader fyne.URIReadCloser, err error) {
+				data, _ := io.ReadAll(reader)
+				entry.SetText(string(data))
+			},
+			window,
+		)
 	})
+	button.Resize(fyne.NewSize(150, 75))
+	button.Move(fyne.NewPos(325, 30))
 
-	window.SetContent(
-		container.NewVBox(
-			button,
-			text,
-			rec,
-		),
+	cont := container.NewWithoutLayout(
+		button,
+		entry,
 	)
+
+	window.SetContent(cont)
 	//window.SetContent(widget.NewLabel("Hello World!"))
 	window.ShowAndRun() // !!! change to show6 now ShowAndRun
 }
