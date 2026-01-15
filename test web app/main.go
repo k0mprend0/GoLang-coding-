@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
@@ -45,6 +47,29 @@ func main() {
 		},
 	)
 
-	window.SetContent(table)
-	window.ShowAndRun() // !!! change to show6 now ShowAndRun
+	row := widget.NewEntry()
+	row.SetPlaceHolder("Row...")
+
+	col := widget.NewEntry()
+	col.SetPlaceHolder("Col...")
+
+	button := widget.NewButton("Select cell", func() {
+		row_value, _ := strconv.Atoi(row.Text)
+		col_value, _ := strconv.Atoi(col.Text)
+
+		table.Select(widget.TableCellID{
+			Row: row_value,
+			Col: col_value,
+		})
+	})
+
+	window.SetContent(
+		container.NewVBox(
+			row,
+			col,
+			button,
+			table,
+		),
+	)
+	window.ShowAndRun()
 }
