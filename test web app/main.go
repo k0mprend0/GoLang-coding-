@@ -53,14 +53,23 @@ func main() {
 	col := widget.NewEntry()
 	col.SetPlaceHolder("Col...")
 
-	button := widget.NewButton("Select cell", func() {
+	button := widget.NewButton("Scroll", func() {
 		row_value, _ := strconv.Atoi(row.Text)
 		col_value, _ := strconv.Atoi(col.Text)
 
-		table.Select(widget.TableCellID{
-			Row: row_value,
-			Col: col_value,
-		})
+		table.Select(
+			widget.TableCellID{
+				Row: row_value,
+				Col: col_value,
+			},
+		)
+
+		table.ScrollTo(
+			widget.TableCellID{
+				Row: row_value,
+				Col: col_value,
+			},
+		)
 	})
 
 	window.SetContent(
