@@ -1,12 +1,10 @@
 package main
 
 import (
-	"io"
+	"fmt"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
@@ -17,23 +15,34 @@ func main() {
 	window.Resize(fyne.NewSize(800, 500))
 	myApp.Settings().SetTheme(theme.DarkTheme())
 
-	entry := widget.NewMultiLineEntry()
+	names := []string{
+		"Kate",
+		"John",
+		"Anrew",
+	}
 
-	save_file := widget.NewButton("Save file", func() {
-		dialog.ShowFileSave(
-			func(writer fyne.URIWriteCloser, err error) {
-				io.WriteString(writer, entry.Text)
-			},
-			window,
-		)
-	})
+	marks := [][]int{
+		{5, 3, 5},
+		{4, 5, 2},
+		{2, 4, 4},
+	}
 
-	window.SetContent(
-		container.NewVBox(
-			entry,
-			save_file,
-		),
+	table := widget.NewTable(
+		func() (rows int, cols int) {
+			return len(names), len(marks[0]) + 1
+		},
+		func() fyne.CanvasObject {
+			return widget.NewLabel("Default text")
+		},
+		func(tci widget.TableCellID, co fyne.CanvasObject) {
+			if tci.Col == 0 {
+				co.(*widget.Label).SetText(names[tci.Row])
+			} else {
+				co.(*widget.Label).SetText(fmt.Sprint(marks[tci.Row][tci.Col-1]))
+			}
+		},
 	)
-	//window.SetContent(widget.NewLabel("Hello World!"))
+
+	window.SetContent(table)
 	window.ShowAndRun() // !!! change to show6 now ShowAndRun
 }
