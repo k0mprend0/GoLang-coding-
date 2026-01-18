@@ -1,0 +1,27 @@
+{{define "index"}}
+
+{{template "header"}}
+
+        <main role="main" class="inner cover">
+            <h1>Главная страница</h1>
+            <p class="lead">Aliquip non velit id ullamco veniam pariatur esse ad cupidatat dolor. Nisi officia reprehenderit incididunt qui minim sunt sint reprehenderit cillum in qui nostrud et deserunt. Ipsum aute ex id do laboris quis aute nulla. Minim excepteur irure incididunt esse veniam ea est eiusmod. Aliquip occaecat magna qui Lorem aliquip. Nulla elit aliquip tempor adipisicing Lorem enim. Dolor officia est excepteur eu enim consectetur qui anim sint laborum nisi veniam.</p>
+
+            {{ range . }}
+            <div class="alert alert-danger">
+                <h2>{{ .Title }}</h2>
+                <p>{{ .Anons }}</p>
+                <a href="/post/{{ .Id }}" class="btn btn-danger">Читать далее</a>
+            </div>
+
+            {{ else }}
+            <p class="lead">Статей нет!</p>
+
+            {{ end }}
+
+            <p class="lead">
+                <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Узнать больше</a>
+            </p>
+        </main>
+
+        {{template "footer"}}
+        {{end}}

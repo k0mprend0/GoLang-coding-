@@ -1,0 +1,52 @@
+{{define "header"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/4.5/examples/cover/cover.css">
+    <link rel="stylesheet" href="static/css/main.css">
+    <style>
+        .nav-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 0.375rem;
+            background-color: transparent;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.8);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .nav-button.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: white;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="d-flex h-100 text-center text-bg-dark">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div>
+                <h3 class="float-md-start mb-0">Web Proger</h3>
+                <nav class="nav justify-content-center float-md-end">
+                    <a class="nav-button active" aria-current="page" href="/">Главная</a>
+                    <a class="nav-button" href="/contacts/">Контакты</a>
+                    <a class="nav-button" href="/create">Создать пост</a>
+                </nav>
+            </div>
+        </header>
+        {{end}}
